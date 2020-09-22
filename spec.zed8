@@ -10,7 +10,7 @@ Tipos básicos
 └
 
 
-Epacio de estado
+Espacio de estado
 ┌ Repositorio
   documentos: ℙ DOCUMENTO
   colaboradores: ℙ PERSONA
@@ -55,10 +55,12 @@ Acceder al documento -> OK
   ΔRepositorio
   colab?: PERSONA
   doc?: DOCUMENTO
+  msj!: REPORTE
 |
   doc? ∉ dom controlados
   (doc?, colab?) ∈ permisos
   controlados′ = controlados ∪ {(doc?, colab?)}
+  msj! = OK
 └
 Acceder al documento -> DOCUMENTO EN EDICION
 ┌ AccederDocEDITANDO
