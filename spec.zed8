@@ -1,0 +1,152 @@
+﻿─ section spec parents standard_toolkit
+└
+
+This specification describes ...
+
+Tipos básicos
+─ [ DOCUMENTO, PERSONA ] └
+─
+  REPORTE ::= OK | ERROR
+└
+
+
+Epacio de estado
+┌ Repositorio
+  documentos: ℙ DOCUMENTO
+  colaboradores: ℙ PERSONA
+  permisos: DOCUMENTO↔PERSONA
+  controlados: DOCUMENTO⇸PERSONA
+|
+  controlados ⊆ permisos
+└
+
+Estado inicial
+┌ RepositorioInicial
+  Repositorio
+|
+  documentos = ∅
+  colaboradores = ∅
+  permisos = ∅
+  controlados = ∅
+└
+
+Añadir colaborador
+┌ AñadirColab
+  ΔRepositorio
+  colab?: PERSONA
+|
+  colab? ∉ colaboradores
+  colaboradores′ = colaboradores ∪ {colab?}
+└
+
+Retirar colaborador
+┌ RetirarColab
+  ΔRepositorio
+  colab?: PERSONA
+|
+  colab? ∈ colaboradores
+  colaboradores′ = colaboradores ∖ {colab?}
+└
+
+Acceder a documento
+
+Acceder al documento -> OK                                           
+┌ AccederDocOK
+  ΔRepositorio
+  colab?: PERSONA
+  doc?: DOCUMENTO
+|
+  doc? ∉ dom controlados
+  (doc?, colab?) ∈ permisos
+  controlados′ = controlados ∪ {(doc?, colab?)}
+└
+Acceder al documento -> DOCUMENTO EN EDICION
+┌ AccederDocEDITANDO
+  ΞRepositorio
+  doc?: DOCUMENTO
+|
+  doc? ∈ dom controlados
+└
+Acceder al documento -> SIN PERMISOS
+┌ AccederDocSINPERMISO
+  ΞRepositorio
+  colab?: PERSONA
+  doc?: DOCUMENTO
+|
+  (doc?, colab?) ∉ permisos
+└
+
+─
+  AccederDoc == AccederDocOK ∨ AccederDocEDITANDO ∨ AccederDocSINPERMISO
+└
+
+Terminar edicion
+┌ TerminarEdicion
+  ΔRepositorio
+  colab?: PERSONA
+  doc?: DOCUMENTO
+|
+  (doc?, colab?) ∈ controlados
+  controlados′ =  controlados ∖ {(doc?, colab?)}
+└
+
+Añadir documento al repositorio
+┌ AñadirDoc
+
+  ΔRepositorio
+  doc?: DOCUMENTO
+|
+  doc? ∉ documentos
+  documentos′ = documentos ∪ {doc?}
+└
+
+Eliminar documento del repositorio
+┌ BorrarDoc
+  ΔRepositorio
+  doc?: DOCUMENTO
+|
+  doc? ∈ documentos
+  doc? ∉ dom controlados
+  documentos′ = documentos ∖ {doc?}
+└
+
+Añadir permisos
+┌ PermisoOK
+  ΔRepositorio
+  colab?: PERSONA
+  doc?: DOCUMENTO
+  msj!: REPORTE 
+|
+  ¬ {(doc?, colab?)} ⊆ permisos 
+  permisos′ = permisos ∪ {(doc?, colab?)}
+  msj! = OK
+└
+
+┌ PermisoERROR
+  ΞRepositorio
+  colab?: PERSONA
+  doc?: DOCUMENTO
+  msj!: REPORTE
+|
+  {(doc?, colab?)} ⊆ permisos 
+  msj! = ERROR
+└
+
+─
+  AñadirPermiso == PermisoOK ∨ PermisoERROR 
+└
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
