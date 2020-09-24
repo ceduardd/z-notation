@@ -9,7 +9,6 @@ Tipos básicos
   REPORTE ::= OK | ERROR
 └
 
-
 Espacio de estado
 ┌ Repositorio
   documentos: ℙ DOCUMENTO
@@ -106,10 +105,12 @@ Eliminar documento del repositorio
 ┌ BorrarDoc
   ΔRepositorio
   doc?: DOCUMENTO
+  msj!: REPORTE
 |
   doc? ∈ documentos
   doc? ∉ dom controlados
   documentos′ = documentos ∖ {doc?}
+  msj!: OK
 └
 
 Añadir permisos
@@ -137,18 +138,3 @@ Añadir permisos
 ─
   AñadirPermiso == PermisoOK ∨ PermisoERROR 
 └
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
