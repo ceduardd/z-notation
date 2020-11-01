@@ -47,9 +47,7 @@ Retirar colaborador
   colaboradores′ = colaboradores ∖ {colab?}
 └
 
-Acceder a documento
-
-Acceder al documento -> OK                                           
+Acceder al documento cuando todo está correcto                                       
 ┌ AccederDocOK
   ΔRepositorio
   colab?: PERSONA
@@ -61,14 +59,16 @@ Acceder al documento -> OK
   controlados′ = controlados ∪ {(doc?, colab?)}
   msj! = OK
 └
-Acceder al documento -> DOCUMENTO EN EDICION
+
+Acceder al documento cuando alguién ya está editando
 ┌ AccederDocEDITANDO
   ΞRepositorio
   doc?: DOCUMENTO
 |
   doc? ∈ dom controlados
 └
-Acceder al documento -> SIN PERMISOS
+
+Acceder al documento cuando el usuario no tiene permisos
 ┌ AccederDocSINPERMISO
   ΞRepositorio
   colab?: PERSONA
@@ -77,11 +77,12 @@ Acceder al documento -> SIN PERMISOS
   (doc?, colab?) ∉ permisos
 └
 
+Esquema calculado para acceder a un documento
 ─
   AccederDoc == AccederDocOK ∨ AccederDocEDITANDO ∨ AccederDocSINPERMISO
 └
 
-Terminar edicion
+Marcar como terminada una modificación
 ┌ TerminarEdicion
   ΔRepositorio
   colab?: PERSONA
@@ -102,7 +103,7 @@ Añadir documento al repositorio
 └
 
 Eliminar documento del repositorio
-┌ BorrarDoc
+┌ BorrarDOC
   ΔRepositorio
   doc?: DOCUMENTO
   msj!: REPORTE
@@ -110,10 +111,10 @@ Eliminar documento del repositorio
   doc? ∈ documentos
   doc? ∉ dom controlados
   documentos′ = documentos ∖ {doc?}
-  msj!: OK
+  msj! = OK
 └
 
-Añadir permisos
+Añadir permiso cuando todo está correcto
 ┌ PermisoOK
   ΔRepositorio
   colab?: PERSONA
@@ -125,6 +126,7 @@ Añadir permisos
   msj! = OK
 └
 
+Añadir permiso cuando ya existe dicho permiso
 ┌ PermisoERROR
   ΞRepositorio
   colab?: PERSONA
@@ -135,6 +137,7 @@ Añadir permisos
   msj! = ERROR
 └
 
+Esquema calculado para añadir permisos
 ─
   AñadirPermiso == PermisoOK ∨ PermisoERROR 
 └
