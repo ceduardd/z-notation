@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700&display=swap');
+
+body {
+  background-color: white;
+  font-family: 'Rubik', sans-serif;
+}
+
+var.zed,
+td.zed {
+  font-style: normal;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen,
+    Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+var.zed,
+td.zed {
+  font-size: smaller;
+}
+
+.title {
+  text-align: center;
+  margin: 1rem 0;
+  text-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+}
+
+.subtitle {
+  text-decoration: none;
+  color: crimson;
+  text-decoration: underline;
+}
